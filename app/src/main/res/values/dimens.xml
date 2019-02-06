@@ -16,12 +16,12 @@
     <dimen name="large_icon_zie">48dp</dimen>
     <dimen name="header_icon_zie">64dp</dimen>
     <dimen name="icon_size">24dp</dimen>
-    <dimen name="dimen.bbn_elevation_tablet">0dp</dimen>
+    <dimen name="bbn_elevation_tablet">0dp</dimen>
     <dimen name="bbn_top_shadow_height">@dimen/spacing_micro</dimen>
     <dimen name="divider_height">1px</dimen>
     <dimen name="avatar_margin">16dp</dimen>
     <dimen name="avatar_margin_end">16dp</dimen>
     <integer name="micro_spans">1</integer>
     <integer name="small_spans">1</integer>
-    <item name="drawable_callback" type="id">drawable_callback</item>
+    <item name="drawable_callback" type="id"/>
 </resources>
