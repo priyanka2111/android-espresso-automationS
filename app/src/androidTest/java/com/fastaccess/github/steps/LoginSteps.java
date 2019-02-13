@@ -1,7 +1,5 @@
 package com.fastaccess.github.steps;
 import android.util.Log;
-
-import com.fastaccess.github.debug.test.R;
 import com.infostretch.android.steps.ApplicationSteps;
 import com.infostretch.android.steps.EspressoSteps;
 
@@ -19,13 +17,12 @@ public class LoginSteps {
         ApplicationSteps.startApp();
     }
     public static void loginWithBasicAuth(String username, String password) throws NoSuchFieldException {
-
-        EspressoSteps.click(R.string.login_basic_auth_btn_loc);
+        EspressoSteps.click("login.basic.auth.btn.loc");
         login(username,password);
     }
     public static void login(String username, String password){
-        EspressoSteps.sendKeys(R.string.login_username_loc,username,true);
-        EspressoSteps.sendKeys(R.string.login_password_loc,password,true);
-        EspressoSteps.click(R.string.login_submit_btn_loc);
+        EspressoSteps.sendKeys("login.username.loc",username,true);
+        EspressoSteps.sendKeys("login.password.loc",password,true);
+        EspressoSteps.click("login.submit.btn.loc");
     }
 }

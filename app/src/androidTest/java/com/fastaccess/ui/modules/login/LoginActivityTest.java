@@ -31,9 +31,9 @@ public class LoginActivityTest {
     @Test public void successLoginClickSuccessTest() {
         String username = "tttcx";
         String password="qazwsxedcrfv123123123";
-        EspressoSteps.sendKeys(R.id.usernameEditText,username);
-        EspressoSteps.sendKeys(R.id.passwordEditText,password);
-        EspressoSteps.click(R.id.login);
+        EspressoSteps.sendKeys("login.username.loc",username);
+        EspressoSteps.sendKeys("login.password.loc",password);
+        EspressoSteps.click("login.submit.btn.loc");
 
     }
 

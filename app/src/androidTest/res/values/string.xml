@@ -2,9 +2,9 @@
 <resources>
     <!-- login screen loc -->
 
-    <string name="login_basic_auth_btn_loc">id=basicAuth</string>
+    <string name="login.basic.auth.btn.loc">id=basicAuth</string>
     <string name="login.username.loc">id=usernameEditText</string>
-    <string name="login_password_loc">id=passwordEditText</string>
-    <string name="login_submit_btn_loc">id=login</string>
+    <string name="login.password.loc">id=passwordEditText</string>
+    <string name="login.submit.btn.loc">id=login</string>
 
 </resources>

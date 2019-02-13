@@ -37,14 +37,12 @@ public class LocatorUtils {
         String s = strategy.toUpperCase();
         switch (s) {
             case "ID":
-                Context context = AutomationCore.getInstance().getInstrumentation().getContext();
-                Context context1 = AutomationCore.getInstance().getInstrumentation().getTargetContext();
-                int id = context1.getResources().getIdentifier(selector,"id",context1.getPackageName());
+                Context targetContext = AutomationCore.getInstance().getInstrumentation().getTargetContext();
+                int id = targetContext.getResources().getIdentifier(selector,"id",targetContext.getPackageName());
                 Log.d("ID_LOCATORSUTIL",String.valueOf(id));
                 return onView(withId(id));
             case "TEXT":
                 return onView(withText(selector));
-
             case "ACCESSIBILITY_ID":
                 return onView(withContentDescription(selector));
 
@@ -52,9 +50,11 @@ public class LocatorUtils {
         return null;
     }
 
-    public static ViewInteraction getViewLocator(int key) {
-        Resources resources = AutomationCore.getInstance().getInstrumentation().getContext().getResources();
-        String value = resources.getString(key);
+    public static ViewInteraction getViewLocator(String key) {
+        Context context = AutomationCore.getInstance().getInstrumentation().getContext();
+        Resources resources = context.getResources();
+        int id = resources.getIdentifier(key,"string",context.getPackageName());
+        String value = resources.getString(id);
         String[] arrOfValue = value.split("=", 2);
         String prefix = arrOfValue[0];
         String suffix = arrOfValue[1];

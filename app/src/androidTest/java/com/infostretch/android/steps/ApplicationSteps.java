@@ -25,7 +25,7 @@ public class ApplicationSteps {
                 .getLaunchIntentForPackage(pkgName);
         ActivitySteps.startActivity(intent);
         mDevice.wait(Until.hasObject(By.pkg(pkgName).depth(0)),
-                5000);
+                10000);
     }
 
     public static void closeApp() {

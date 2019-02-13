@@ -13,6 +13,5 @@ public class LoginTestCases extends BaseTestCase {
         openApp();
         loginWithBasicAuth("username","password");
         verifyOnHomePage();
-
     }
 }

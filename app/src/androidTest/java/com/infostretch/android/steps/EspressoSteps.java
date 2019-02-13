@@ -10,16 +10,16 @@ import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 
 public class EspressoSteps {
 
-    public static void click(int loc) {
+    public static void click(String loc) {
         getElement(loc).perform(ViewActions.click());
     }
 
-    public static void sendKeys(int loc, String text) {
+    public static void sendKeys(String loc, String text) {
         sendKeys(loc,text,false);
 
     }
 
-    public static void sendKeys(int loc, String text, boolean hideKeyboard) {
+    public static void sendKeys(String loc, String text, boolean hideKeyboard) {
         if(hideKeyboard==true){
             getElement(loc).perform(ViewActions.typeText(text),closeSoftKeyboard());
         }else{
@@ -27,7 +27,7 @@ public class EspressoSteps {
         }
     }
 
-    public static ViewInteraction getElement(int loc){
+    public static ViewInteraction getElement(String loc){
         return LocatorUtils.getViewLocator(loc);
     }
 }
