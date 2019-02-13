@@ -1,6 +1,7 @@
 package com.fastaccess.ui.modules.login;
 
 
+import android.support.test.espresso.core.deps.guava.io.Resources;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
@@ -27,6 +28,7 @@ public class LoginChooserActivityTest {
 
     @Test public void basicAuthButtonTest() {
         onView(withId(R.id.basicAuth)).perform(click());
+
         intended(hasComponent(LoginActivity.class.getName()));
         onView(withId(R.id.password)).check(matches(textInputLayoutHasHint(intentTestRule.getActivity().getString(R.string.password))));
     }

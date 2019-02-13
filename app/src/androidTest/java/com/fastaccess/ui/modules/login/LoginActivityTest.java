@@ -1,11 +1,13 @@
 package com.fastaccess.ui.modules.login;
 
 
+import android.support.test.espresso.Espresso;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.fastaccess.R;
+import com.infostretch.android.steps.EspressoSteps;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,12 +29,12 @@ public class LoginActivityTest {
     @Rule public ActivityTestRule<LoginActivity> testRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test public void successLoginClickSuccessTest() {
-        String username = "username";
-        String password = "password";
-        onView(withId(R.id.usernameEditText)).perform(typeText(username), closeSoftKeyboard());
-        onView(withId(R.id.passwordEditText)).perform(typeText(password), closeSoftKeyboard());
-        onView(withId(R.id.login)).perform(click());
-        onView(withId(R.id.progress)).check(matches(isDisplayed()));
+        String username = "tttcx";
+        String password="qazwsxedcrfv123123123";
+        EspressoSteps.sendKeys(R.id.usernameEditText,username);
+        EspressoSteps.sendKeys(R.id.passwordEditText,password);
+        EspressoSteps.click(R.id.login);
+
     }
 
     @Test public void usernameErrorTest() {
@@ -49,6 +51,7 @@ public class LoginActivityTest {
         onView(withId(R.id.login)).perform(click());
         onView(withId(R.id.progress)).check(matches(not(isDisplayed())));
         onView(withId(R.id.password)).check(matches(textInputLayoutHasError(testRule.getActivity().getString(R.string.required_field))));
+
     }
 
 }

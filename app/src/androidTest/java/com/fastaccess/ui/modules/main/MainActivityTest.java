@@ -10,7 +10,6 @@ import com.fastaccess.ui.modules.main.issues.pager.MyIssuesPagerFragment;
 import com.fastaccess.ui.modules.main.pullrequests.pager.MyPullsPagerFragment;
 import com.fastaccess.ui.modules.notification.NotificationActivity;
 import com.fastaccess.ui.modules.search.SearchActivity;
-
 import org.junit.Rule;
 import org.junit.Test;
 

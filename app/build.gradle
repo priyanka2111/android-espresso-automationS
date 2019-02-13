@@ -77,6 +77,12 @@ android {
                     "src/main/res"
             ]
         }
+        androidTest{
+            res.srcDirs = [
+                    "src/androidTest/res",
+                    "src/androidTest/res/"
+            ]
+        }
     }
 
     lintOptions {
@@ -187,6 +193,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:0.5'
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espresseVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresseVersion}"
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

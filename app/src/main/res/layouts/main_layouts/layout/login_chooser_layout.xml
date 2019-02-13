@@ -150,7 +150,7 @@
                             android:gravity="center"
                             android:padding="@dimen/spacing_xs_large"
                             android:text="@string/basic_authentication"
-                            android:textColor="@color/material_green_700"/>
+                            android:textColor="@color/material_green_700" />
 
                         <com.fastaccess.ui.widgets.FontTextView
                             style="@style/TextAppearance.AppCompat.Small"
