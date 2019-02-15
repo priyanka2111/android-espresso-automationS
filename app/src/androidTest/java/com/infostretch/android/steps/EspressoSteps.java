@@ -7,6 +7,7 @@ import android.support.test.espresso.action.ViewActions;
 import com.infostretch.android.utils.LocatorUtils;
 
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 
 public class EspressoSteps {
 
@@ -26,6 +27,7 @@ public class EspressoSteps {
             getElement(loc).perform(ViewActions.typeText(text));
         }
     }
+
 
     public static ViewInteraction getElement(String loc){
         return LocatorUtils.getViewLocator(loc);
