@@ -14,18 +14,24 @@ public class ApplicationSteps {
         startApp(true);
     }
 
-    public static void startApp(boolean waitForApp){
-        UiDevice mDevice = getInstance().getUiDevice();
+    public static UiDevice getmDevice() {
+        return mDevice;
+    }
+
+    static UiDevice mDevice;
+
+    public static void startApp(boolean waitForApp) {
+        mDevice = getInstance().getUiDevice();
         String pkgName = getInstance().getTargetContext().getPackageName();
         final String launcherPackage = mDevice.getLauncherPackageName();
         mDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)),
-                5000);
+                30000);
         Context context = getInstance().getInstrumentation().getContext();
         final Intent intent = context.getPackageManager()
                 .getLaunchIntentForPackage(pkgName);
         ActivitySteps.startActivity(intent);
         mDevice.wait(Until.hasObject(By.pkg(pkgName).depth(0)),
-                10000);
+                30000);
     }
 
     public static void closeApp() {

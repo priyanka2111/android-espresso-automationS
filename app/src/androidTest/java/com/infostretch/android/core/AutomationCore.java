@@ -11,7 +11,7 @@ public class AutomationCore {
     UiDevice uiDevice;
 
     private AutomationCore(){
-        init();
+       init();
     }
 
     private void init(){
@@ -19,6 +19,7 @@ public class AutomationCore {
     }
 
     public UiDevice getUiDevice() {
+        //return UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         return uiDevice;
     }
 

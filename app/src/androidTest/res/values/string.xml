@@ -7,4 +7,17 @@
     <string name="login.password.loc">id=passwordEditText</string>
     <string name="login.submit.btn.loc">id=login</string>
 
+
+    <string name="login.ui.submit.btn.loc">id=com.fastaccess.github.debug:id/login</string>
+    <string name="login.ui.basic.auth.btn.loc">id=com.fastaccess.github.debug:id/basicAuth</string>
+    <string name="login.ui.username.loc">id=com.fastaccess.github.debug:id/usernameEditText</string>
+    <string name="login.ui.password.loc">id=com.fastaccess.github.debug:id/passwordEditText</string>
+
+    <string name="login.ui.basic.auth.txt.btn.loc">text="Basic Authentication"</string>
+
+
+    <string name="home.ui.menu.drawer.loc">contdesc="Navigate up"</string>
+
+    <!--string name="login.menu.btn.loc">contdesc=‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‎‏‏‎‎‎‎‏‏‏‏‏‏‏‎‏‏‏‏‏‎‏‎‎‏‏‎‏‎‎‎‎‎‏‏‏‎‏‎‎‎‎‎‏‏‎‏‏‎‎‏‎‏‎‏‏‏‏‏‎‎Navigate up‎‏‎‎‏‎</string-->
+
 </resources>
