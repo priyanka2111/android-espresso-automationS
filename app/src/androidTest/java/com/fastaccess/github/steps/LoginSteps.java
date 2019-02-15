@@ -19,16 +19,10 @@ public class LoginSteps {
         EspressoSteps.sendKeys("login.password.loc",password,true);
         EspressoSteps.click("login.submit.btn.loc");
     }
-//    public static void clickMenu()
-//    {
-//        EspressoSteps.click("login.menu.btn.loc");
-//    }
-
     public static void UIloginWithBasicAuth(String username, String password){
         UiAutomatorSteps.click("login.ui.basic.auth.txt.btn.loc");
         UiLogin(username,password);
     }
-
     public static void UiLogin(String username, String password)
     {
         UiAutomatorSteps.sendKeys("login.ui.username.loc",username,true);

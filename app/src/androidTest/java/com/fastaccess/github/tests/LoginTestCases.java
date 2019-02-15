@@ -27,5 +27,4 @@ public class LoginTestCases extends BaseTestCase {
         verifyOnHomePage();
        // UiClickMenu();
     }
-
 }
