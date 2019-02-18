@@ -8,12 +8,16 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
+import android.widget.Toast;
 
 import com.infostretch.android.core.AutomationCore;
 import com.infostretch.android.core.NoSuchElementFoundException;
 import com.infostretch.android.utils.LocatorUtils;
 
 public class UiAutomatorSteps {
+
+    private static UiObject2 uiObject2;
+
     public static void click(String loc) {
         try {
             getUIElement(loc).click();
@@ -38,15 +42,175 @@ public class UiAutomatorSteps {
         }
     }
 
+    public static void clickAndWaitForNewWindowAppears(String loc) {
+        clickAndWaitForNewWindowAppears(loc, 5000);
+    }
 
-    public static void presenceOfElementLocated(String loc) throws Exception {
+    public static void clickAndWaitForNewWindowAppears(String loc, long timeout) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.clickAndWait(Until.newWindow(), timeout);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementTextContains(String loc, String text) {
+
+        elementTextContains(loc, text, 5000);
+
+    }
+
+    public static void elementTextContains(String loc, String text, long timeout) {
+
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.textContains(text), timeout);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementToBeFocused(String loc) {
+        try {
+            elementToBeFocused(loc, 5000);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementToBeFocused(String loc, long timeout) {
+
+
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.focused(true), timeout);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public static void elementToBeToBeGone(String loc) {
+
+        try {
+            elementToBeToBeGone(loc, 5000);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementToBeToBeGone(String loc, long timeout) {
+
+
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.enabled(true), timeout);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementToBeFocusable(String loc) {
+
+
+        try {
+            elementToBeFocusable(loc, 5000);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public static void elementToBeFocusable(String loc, long timeout) {
+
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.focusable(true), timeout);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void textToBePresentInElement(String loc, String text) {
+
+
+        try {
+            textToBePresentInElement(loc, text, 5000);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void textToBePresentInElement(String loc, String text, long timeout) {
+
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.textEquals(text), timeout);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public static void elementToBeEnable(String loc) {
+
+        try {
+            elementToBeEnable(loc, 5000);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementToBeEnable(String loc, long timeout) {
+
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.enabled(true), timeout);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementToBeClickable(String loc) {
+
+        try {
+            elementToBeClickable(loc, 5000);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void elementToBeClickable(String loc, long timeout) {
+
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.clickable(true), timeout);
+
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void presenceOfElementLocated(String loc) {
         presenceOfElementLocated(loc, 5000);
     }
 
-    public static void presenceOfElementLocated(String loc, long timeout) throws Exception {
+    public static void presenceOfElementLocated(String loc, long timeout) {
 
-        BySelector byselector = getBySelector(loc);
-        AutomationCore.getInstance().getUiDevice().wait(Until.hasObject(byselector), timeout);
+        try {
+            BySelector byselector = getBySelector(loc);
+            AutomationCore.getInstance().getUiDevice().wait(Until.hasObject(byselector), timeout);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
