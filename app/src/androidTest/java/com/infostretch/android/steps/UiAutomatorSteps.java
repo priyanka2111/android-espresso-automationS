@@ -9,10 +9,16 @@ import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
 import android.widget.Toast;
-
 import com.infostretch.android.core.AutomationCore;
 import com.infostretch.android.core.NoSuchElementFoundException;
 import com.infostretch.android.utils.LocatorUtils;
+import org.hamcrest.MatcherAssert;
+import org.junit.Assert;
+
+
+
+import static org.hamcrest.Matchers.equalTo;
+
 
 public class UiAutomatorSteps {
 
@@ -92,16 +98,16 @@ public class UiAutomatorSteps {
     }
 
 
-    public static void elementToBeToBeGone(String loc) {
+    public static void elementToBeGone(String loc) {
 
         try {
-            elementToBeToBeGone(loc, 5000);
+            elementToBeGone(loc, 5000);
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void elementToBeToBeGone(String loc, long timeout) {
+    public static void elementToBeGone(String loc, long timeout) {
 
 
         try {
@@ -213,6 +219,97 @@ public class UiAutomatorSteps {
         }
     }
 
+
+    public static void verifyTextPresent(String loc, String message, String text)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            MatcherAssert.assertThat(message,uiObject2.getText().toString(),equalTo(text));
+        }
+        catch(Exception e)
+        {
+          Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void verifyIsEnabled(String loc, String message)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message,uiObject2.isEnabled());
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void verifyIsClickable(String loc,String message)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message,uiObject2.isClickable());
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void verifyIsScrollable(String loc,String message)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message,uiObject2.isScrollable());
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void verifyIsCheckable(String loc,String message)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message,uiObject2.isCheckable());
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void verifyIsChecked(String loc,String message)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message,uiObject2.isChecked());
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void verifyIsLongClickable(String loc,String message)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message,uiObject2.isLongClickable());
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void verifyIsFocusable(String loc,String message)
+    {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message,uiObject2.isFocusable());
+
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private static BySelector getBySelector(String loc) throws Exception {
         Context context = AutomationCore.getInstance().getInstrumentation().getContext();
