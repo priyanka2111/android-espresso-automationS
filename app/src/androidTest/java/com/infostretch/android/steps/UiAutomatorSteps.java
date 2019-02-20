@@ -13,7 +13,7 @@ import android.support.test.uiautomator.Until;
 import android.widget.Toast;
 
 import com.infostretch.android.core.AutomationCore;
-import com.infostretch.android.core.NoSuchElementFoundException;
+import com.infostretch.android.exceptions.NoSuchElementFoundException;
 import com.infostretch.android.utils.LocatorUtils;
 
 import org.hamcrest.MatcherAssert;

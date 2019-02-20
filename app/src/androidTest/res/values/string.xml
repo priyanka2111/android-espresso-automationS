@@ -17,7 +17,6 @@
 
 
     <string name="home.ui.menu.drawer.loc">contdesc="Navigate up"</string>
-
     <!--string name="login.menu.btn.loc">contdesc=‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‎‏‏‎‎‎‎‏‏‏‏‏‏‏‎‏‏‏‏‏‎‏‎‎‏‏‎‏‎‎‎‎‎‏‏‏‎‏‎‎‎‎‎‏‏‎‏‏‎‎‏‎‏‎‏‏‏‏‏‎‎Navigate up‎‏‎‎‏‎</string-->
 
 </resources>

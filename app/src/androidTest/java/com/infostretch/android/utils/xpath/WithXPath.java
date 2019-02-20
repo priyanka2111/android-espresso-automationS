@@ -1,19 +1,28 @@
-package com.infostretch.android.EspressoXpathSupportUtils;
+package com.infostretch.android.utils.xpath;
 import android.support.annotation.Nullable;
 import android.view.View;
+
+import com.infostretch.android.exceptions.AutomationError;
+import com.infostretch.android.exceptions.AutomationException;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class WithXPath {
     public static Matcher<View> withXPath(@Nullable final View root, final String xpath,
-                                          @Nullable final Integer index) throws AppiumException {
-        // Get a list of the Views that match the provided xpath
-        final List<View> matchedXPathViews = new SourceDocument(root).findViewsByXPath(xpath);
+                                          @Nullable final Integer index){
+
+        final List<View> matchedXPathViews = new ArrayList<>();
+        try{
+            matchedXPathViews.addAll(new SourceDocument(root).findViewsByXPath(xpath));
+        }catch(AutomationException exception){
+            throw new AutomationError(exception);
+        }
 
         return new TypeSafeMatcher<View>() {
             @Override
@@ -34,7 +43,11 @@ public class WithXPath {
         };
     }
 
-    public static Matcher<View> withXPath(@Nullable final View root, final String xpath) throws AppiumException {
+    public static Matcher<View> withXPath(@Nullable final View root, final String xpath){
         return withXPath(root, xpath, null);
+    }
+
+    public static Matcher<View> withXPath(final String xpath){
+        return withXPath(new ViewGetter().getRootView(), xpath, null);
     }
 }

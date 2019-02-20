@@ -6,16 +6,16 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.util.Log;
-
-import com.infostretch.android.EspressoXpathSupportUtils.AppiumException;
-import com.infostretch.android.EspressoXpathSupportUtils.ViewGetter;
+import com.infostretch.android.utils.xpath.ViewGetter;
 import com.infostretch.android.core.AutomationCore;
+import com.infostretch.android.exceptions.AutomationException;
+import com.infostretch.android.exceptions.NoSuchElementFoundException;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.infostretch.android.EspressoXpathSupportUtils.WithXPath.withXPath;
+import static com.infostretch.android.utils.xpath.WithXPath.withXPath;
 
 public class LocatorUtils {
     private static final String ID_PATTERN = "[\\S]+:id/[\\S]+";
@@ -33,12 +33,7 @@ public class LocatorUtils {
             case "ACCESSIBILITY_ID":
                 return onView(withContentDescription(selector));
             case "XPATH":
-                try {
-                    return onView(withXPath(new ViewGetter().getRootView(),selector));
-                } catch (AppiumException e) {
-                    e.printStackTrace();
-                }
-
+                return onView(withXPath(selector));
 
         }
         return null;
@@ -48,13 +43,21 @@ public class LocatorUtils {
         Context context = AutomationCore.getInstance().getInstrumentation().getContext();
         Resources resources = context.getResources();
         int id = resources.getIdentifier(key,"string",context.getPackageName());
-        String value = resources.getString(id);
-        String[] arrOfValue = value.split("=", 2);
-        String prefix = arrOfValue[0];
-        String suffix = arrOfValue[1];
-        Log.d("suffix",suffix);
-        Log.d("prefix",prefix);
-        return getViewInteraction(prefix, suffix);
+
+        String strategy = "xpath";
+        String selector = "";
+        String value = key;
+        if(id!=0){
+            value = resources.getString(id);
+        }
+        if(value.indexOf('=')>0){
+            String[] arrOfValue = value.split("=", 2);
+            strategy = arrOfValue[0];
+            selector = arrOfValue[1];
+        }else{
+            selector = value;
+        }
+        return getViewInteraction(strategy, selector);
     }
 
 

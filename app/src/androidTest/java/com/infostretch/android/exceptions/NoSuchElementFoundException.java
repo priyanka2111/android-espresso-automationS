@@ -1,4 +1,4 @@
-package com.infostretch.android.core;
+package com.infostretch.android.exceptions;
 
 public class NoSuchElementFoundException extends RuntimeException {
 
