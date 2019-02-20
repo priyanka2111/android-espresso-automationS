@@ -6,6 +6,8 @@ import com.infostretch.android.utils.xpath.ViewGetter;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -17,7 +19,9 @@ public class EspressoXpathDemoTest {
     @Test
     public void xPathTest() {
         startApp();
-        EspressoSteps.click("xpath=//*[contains(@resource-id,'basicAuth')]");
+        EspressoSteps.click("just.test");
+
+
     }
 
 }

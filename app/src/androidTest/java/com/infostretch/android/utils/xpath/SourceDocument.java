@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -274,6 +275,14 @@ public class SourceDocument {
                     sb.append(line);
                 }
                 Log.i("XML File",sb.toString());
+                int maxLogSize = 500;
+                String veryLongString = sb.toString();
+                for(int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+                    int start = i * maxLogSize;
+                    int end = (i+1) * maxLogSize;
+                    end = end > veryLongString.length() ? veryLongString.length() : end;
+                    Log.v("TAG", veryLongString.substring(start, end));
+                }
             } catch (IOException e) {
                 throw new AutomationException(e);
             } finally {
