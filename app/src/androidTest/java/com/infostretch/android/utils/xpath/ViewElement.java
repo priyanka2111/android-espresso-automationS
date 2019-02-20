@@ -1,4 +1,4 @@
-package com.infostretch.android.EspressoXpathSupportUtils;
+package com.infostretch.android.utils.xpath;
 
 import android.app.Activity;
 import android.content.Context;

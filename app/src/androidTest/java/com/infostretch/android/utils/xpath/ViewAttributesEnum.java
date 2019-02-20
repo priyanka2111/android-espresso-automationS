@@ -1,4 +1,4 @@
-package com.infostretch.android.EspressoXpathSupportUtils;
+package com.infostretch.android.utils.xpath;
 
 
 public enum ViewAttributesEnum {

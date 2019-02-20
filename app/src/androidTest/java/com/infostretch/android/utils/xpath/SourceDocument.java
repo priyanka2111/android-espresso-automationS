@@ -1,7 +1,8 @@
-package com.infostretch.android.EspressoXpathSupportUtils;
+package com.infostretch.android.utils.xpath;
 import android.content.Context;
 import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.Xml;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 
 import com.infostretch.android.core.AutomationCore;
+import com.infostretch.android.exceptions.AutomationException;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -36,9 +38,9 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import static com.infostretch.android.EspressoXpathSupportUtils.StringHelpers.abbreviate;
-import static com.infostretch.android.EspressoXpathSupportUtils.XMLHelpers.toNodeName;
-import static com.infostretch.android.EspressoXpathSupportUtils.XMLHelpers.toSafeString;
+import static com.infostretch.android.utils.StringUtils.abbreviate;
+import static com.infostretch.android.utils.xpath.XMLHelpers.toNodeName;
+import static com.infostretch.android.utils.xpath.XMLHelpers.toSafeString;
 
 public class SourceDocument {
     private static XPath xpath = XPathFactory.newInstance().newXPath();
@@ -180,7 +182,7 @@ public class SourceDocument {
         serializer.endTag(NAMESPACE, tagName);
     }
 
-    private InputStream toStream() throws AppiumException {
+    private InputStream toStream() throws AutomationException {
         Throwable lastError = null;
         final View rootView = root == null ? new ViewGetter().getRootView() : root;
         // Try to serialize the xml into the memory first, since it is fast
@@ -224,7 +226,7 @@ public class SourceDocument {
         if (lastError instanceof OutOfMemoryError) {
             throw (OutOfMemoryError) lastError;
         }
-        throw new AppiumException(lastError);
+        throw new AutomationException(lastError);
     }  private void performCleanup() {
         if (tmpXmlName != null) {
             AutomationCore.getInstance().getTargetContext().deleteFile(tmpXmlName);
@@ -232,11 +234,11 @@ public class SourceDocument {
         }
     }
 
-    public String toXMLString() throws AppiumException {
+    public String toXMLString() throws AutomationException {
         try {
             RESOURCES_GUARD.acquire();
         } catch (InterruptedException e) {
-            throw new AppiumException(e);
+            throw new AutomationException(e);
         }
         try (InputStream xmlStream = toStream()) {
             StringBuilder sb = new StringBuilder();
@@ -247,13 +249,13 @@ public class SourceDocument {
             }
             return sb.toString();
         } catch (IOException e) {
-            throw new AppiumException(e);
+            throw new AutomationException(e);
         } finally {
             performCleanup();
             RESOURCES_GUARD.release();
         }
     }
-    public List<View> findViewsByXPath(String xpathSelector) throws AppiumException {
+    public List<View> findViewsByXPath(String xpathSelector) throws AutomationException {
         try {
             // Get the Nodes that match the provided xpath
             XPathExpression expr = xpath.compile(xpathSelector);
@@ -261,12 +263,27 @@ public class SourceDocument {
             try {
                 RESOURCES_GUARD.acquire();
             } catch (InterruptedException e) {
-                throw new AppiumException(e);
+                throw new AutomationException(e);
             }
+
+            try (InputStream xmlStream = toStream()) {
+                StringBuilder sb = new StringBuilder();
+                String line;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(xmlStream, XML_ENCODING));
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                Log.i("XML File",sb.toString());
+            } catch (IOException e) {
+                throw new AutomationException(e);
+            } finally {
+                performCleanup();
+            }
+
             try (InputStream xmlStream = toStream()) {
                 list = (NodeList) expr.evaluate(new InputSource(xmlStream), XPathConstants.NODESET);
             } catch (IOException e) {
-                throw new AppiumException(e);
+                throw new AutomationException(e);
             } finally {
                 performCleanup();
                 RESOURCES_GUARD.release();

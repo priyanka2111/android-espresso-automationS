@@ -1,4 +1,4 @@
-package com.infostretch.android.EspressoXpathSupportUtils;
+package com.infostretch.android.utils.xpath;
 
 import android.support.annotation.Nullable;
 
