@@ -2,19 +2,22 @@ package com.infostretch.android.steps;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Path;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.BySelector;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
 import android.widget.Toast;
+
 import com.infostretch.android.core.AutomationCore;
 import com.infostretch.android.core.NoSuchElementFoundException;
 import com.infostretch.android.utils.LocatorUtils;
+
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
-
 
 
 import static org.hamcrest.Matchers.equalTo;
@@ -48,26 +51,92 @@ public class UiAutomatorSteps {
         }
     }
 
+    public static void waitForElementToBeChecked(String loc) {
+        try {
+            waitForElementToBeChecked(loc, 5000);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public static void waitForElementToBeChecked(String loc, long timeout) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.checked(true), timeout);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void waitForElementToBeCheckable(String loc) {
+        try {
+            waitForElementToBeCheckable(loc, 5000);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void waitForElementToBeCheckable(String loc, long timeout) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.wait(Until.checkable(true), timeout);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void clickAndWaitForScrollFinished(String loc, String direction) {
+        try {
+            clickAndWaitForScrollFinished(loc, direction, 5000);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void clickAndWaitForScrollFinished(String loc, String direction, long timeout) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            uiObject2.clickAndWait(Until.scrollFinished(Direction.valueOf(direction)), timeout);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public static void clickAndWaitForNewWindowAppears(String loc) {
-        clickAndWaitForNewWindowAppears(loc, 5000);
+        try {
+            clickAndWaitForNewWindowAppears(loc, 5000);
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static void clickAndWaitForNewWindowAppears(String loc, long timeout) {
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
             uiObject2.clickAndWait(Until.newWindow(), timeout);
+
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void elementTextContains(String loc, String text) {
+    public static void waitForElementTextContains(String loc, String text) {
 
-        elementTextContains(loc, text, 5000);
+        try {
+            waitForElementTextContains(loc, text, 5000);
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
-    public static void elementTextContains(String loc, String text, long timeout) {
+    public static void waitForElementTextContains(String loc, String text, long timeout) {
 
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
@@ -77,15 +146,15 @@ public class UiAutomatorSteps {
         }
     }
 
-    public static void elementToBeFocused(String loc) {
+    public static void waitForElementToBeFocused(String loc) {
         try {
-            elementToBeFocused(loc, 5000);
+            waitForElementToBeFocused(loc, 5000);
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void elementToBeFocused(String loc, long timeout) {
+    public static void waitForElementToBeFocused(String loc, long timeout) {
 
 
         try {
@@ -98,16 +167,16 @@ public class UiAutomatorSteps {
     }
 
 
-    public static void elementToBeGone(String loc) {
+    public static void waitForElementToBeGone(String loc) {
 
         try {
-            elementToBeGone(loc, 5000);
+            waitForElementToBeGone(loc, 5000);
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void elementToBeGone(String loc, long timeout) {
+    public static void waitForElementToBeGone(String loc, long timeout) {
 
 
         try {
@@ -118,18 +187,18 @@ public class UiAutomatorSteps {
         }
     }
 
-    public static void elementToBeFocusable(String loc) {
+    public static void waitForElementToBeFocusable(String loc) {
 
 
         try {
-            elementToBeFocusable(loc, 5000);
+            waitForElementToBeFocusable(loc, 5000);
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    public static void elementToBeFocusable(String loc, long timeout) {
+    public static void waitForElementToBeFocusable(String loc, long timeout) {
 
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
@@ -140,17 +209,17 @@ public class UiAutomatorSteps {
         }
     }
 
-    public static void textToBePresentInElement(String loc, String text) {
+    public static void waitForTextToBePresent(String loc, String text) {
 
 
         try {
-            textToBePresentInElement(loc, text, 5000);
+            waitForTextToBePresent(loc, text, 5000);
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void textToBePresentInElement(String loc, String text, long timeout) {
+    public static void waitForTextToBePresent(String loc, String text, long timeout) {
 
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
@@ -162,17 +231,17 @@ public class UiAutomatorSteps {
     }
 
 
-    public static void elementToBeEnable(String loc) {
+    public static void waitForElementToBeEnable(String loc) {
 
         try {
-            elementToBeEnable(loc, 5000);
+            waitForElementToBeEnable(loc, 5000);
 
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void elementToBeEnable(String loc, long timeout) {
+    public static void waitForElementToBeEnable(String loc, long timeout) {
 
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
@@ -183,17 +252,17 @@ public class UiAutomatorSteps {
         }
     }
 
-    public static void elementToBeClickable(String loc) {
+    public static void waitForElementToBeClickable(String loc) {
 
         try {
-            elementToBeClickable(loc, 5000);
+            waitForElementToBeClickable(loc, 5000);
 
         } catch (Exception e) {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void elementToBeClickable(String loc, long timeout) {
+    public static void waitForElementToBeClickable(String loc, long timeout) {
 
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
@@ -205,11 +274,11 @@ public class UiAutomatorSteps {
         }
     }
 
-    public static void presenceOfElementLocated(String loc) {
-        presenceOfElementLocated(loc, 5000);
+    public static void waitForElementToBePresent(String loc) {
+        waitForElementToBePresent(loc, 5000);
     }
 
-    public static void presenceOfElementLocated(String loc, long timeout) {
+    public static void waitForElementToBePresent(String loc, long timeout) {
 
         try {
             BySelector byselector = getBySelector(loc);
@@ -220,94 +289,76 @@ public class UiAutomatorSteps {
     }
 
 
-    public static void verifyTextPresent(String loc, String message, String text)
-    {
+    public static void verifyTextPresent(String loc, String message, String text) {
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            MatcherAssert.assertThat(message,uiObject2.getText().toString(),equalTo(text));
-        }
-        catch(Exception e)
-        {
-          Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
-    }
-    public static void verifyIsEnabled(String loc, String message)
-    {
-        try {
-            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            Assert.assertTrue(message,uiObject2.isEnabled());
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            MatcherAssert.assertThat(message, uiObject2.getText().toString(), equalTo(text));
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void verifyIsClickable(String loc,String message)
-    {
+    public static void verifyIsEnabled(String loc, String message) {
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            Assert.assertTrue(message,uiObject2.isClickable());
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            Assert.assertTrue(message, uiObject2.isEnabled());
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-    public static void verifyIsScrollable(String loc,String message)
-    {
-        try {
-            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            Assert.assertTrue(message,uiObject2.isScrollable());
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
-    }
-    public static void verifyIsCheckable(String loc,String message)
-    {
-        try {
-            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            Assert.assertTrue(message,uiObject2.isCheckable());
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
-    }
-    public static void verifyIsChecked(String loc,String message)
-    {
-        try {
-            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            Assert.assertTrue(message,uiObject2.isChecked());
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
-    }
-    public static void verifyIsLongClickable(String loc,String message)
-    {
-        try {
-            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            Assert.assertTrue(message,uiObject2.isLongClickable());
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
-    }
-    public static void verifyIsFocusable(String loc,String message)
-    {
-        try {
-            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
-            Assert.assertTrue(message,uiObject2.isFocusable());
 
+    public static void verifyIsClickable(String loc, String message) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message, uiObject2.isClickable());
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        catch(Exception e)
-        {
-            Toast.makeText(AutomationCore.getInstance().getTargetContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
+    public static void verifyIsScrollable(String loc, String message) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message, uiObject2.isScrollable());
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void verifyIsCheckable(String loc, String message) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message, uiObject2.isCheckable());
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void verifyIsChecked(String loc, String message) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message, uiObject2.isChecked());
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void verifyIsLongClickable(String loc, String message) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message, uiObject2.isLongClickable());
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void verifyIsFocusable(String loc, String message) {
+        try {
+            uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
+            Assert.assertTrue(message, uiObject2.isFocusable());
+
+        } catch (Exception e) {
+            Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
