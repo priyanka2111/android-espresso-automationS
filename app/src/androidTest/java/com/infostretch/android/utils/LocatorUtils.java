@@ -83,7 +83,9 @@ public class LocatorUtils {
                     selector = AutomationCore.getInstance().getUiDevice().getCurrentPackageName()+":id/"+selector;
                 return AutomationCore.getInstance().getUiDevice().findObject(uiSelector.resourceId(selector));
             case "TEXT":
-                return AutomationCore.getInstance().getUiDevice().findObject(uiSelector.textContains(selector));
+                // containsText matches is case insensitive
+                // text is case sensitive....
+                return AutomationCore.getInstance().getUiDevice().findObject(uiSelector.text(selector));
             case "ACCESSIBILITY_ID":
 
             case "CONTDESC":
