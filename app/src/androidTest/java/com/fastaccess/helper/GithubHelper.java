@@ -1,10 +1,18 @@
 package com.fastaccess.helper;
 
+import android.util.Log;
+
+import com.infostretch.android.steps.UiAutomatorSteps;
+
 import org.kohsuke.github.GHGist;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedIterable;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class GithubHelper {
     static GitHub github;
@@ -107,11 +115,25 @@ public class GithubHelper {
     }
 
     public static boolean isGistPresent(String title){
-
         PagedIterable<GHGist> myGistList = getGistList();
         for(GHGist gist : myGistList){
             if(gist.getDescription().equals(title)) return true;
         }
         return false;
+    }
+
+    public static boolean areGistPresent(Set<String> set){
+        PagedIterable<GHGist> myGistList = getGistList();
+        List<String> gitub_set = new ArrayList<String>();
+        for(GHGist gist : myGistList){
+            gitub_set.add(gist.getDescription());
+            Log.d("GITT",gist.getDescription());
+        }
+        for(String s : set){
+            Log.d("SETY",s);
+        }
+        if(gitub_set.containsAll(set)) return true;
+        else return false;
+
     }
 }

@@ -3,13 +3,15 @@ package com.infostretch.android.utils;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiSelector;
 import android.util.Log;
-import com.infostretch.android.utils.xpath.ViewGetter;
+
 import com.infostretch.android.core.AutomationCore;
-import com.infostretch.android.exceptions.AutomationException;
-import com.infostretch.android.exceptions.NoSuchElementFoundException;
+
+import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -25,8 +27,8 @@ public class LocatorUtils {
         switch (s) {
             case "ID":
                 Context targetContext = AutomationCore.getInstance().getInstrumentation().getTargetContext();
-                int id = targetContext.getResources().getIdentifier(selector,"id",targetContext.getPackageName());
-                Log.d("ID_LOCATORSUTIL",String.valueOf(id));
+                int id = targetContext.getResources().getIdentifier(selector, "id", targetContext.getPackageName());
+                Log.d("ID_LOCATORSUTIL", String.valueOf(id));
                 return onView(withId(id));
             case "TEXT":
                 return onView(withText(selector));
@@ -42,19 +44,19 @@ public class LocatorUtils {
     public static ViewInteraction getViewLocator(String key) {
         Context context = AutomationCore.getInstance().getInstrumentation().getContext();
         Resources resources = context.getResources();
-        int id = resources.getIdentifier(key,"string",context.getPackageName());
+        int id = resources.getIdentifier(key, "string", context.getPackageName());
 
         String strategy = "xpath";
         String selector = "";
         String value = key;
-        if(id!=0){
+        if (id != 0) {
             value = resources.getString(id);
         }
-        if(value.indexOf('=')>0){
+        if (value.indexOf('=') > 0) {
             String[] arrOfValue = value.split("=", 2);
             strategy = arrOfValue[0];
             selector = arrOfValue[1];
-        }else{
+        } else {
             selector = value;
         }
         return getViewInteraction(strategy, selector);
@@ -64,14 +66,26 @@ public class LocatorUtils {
     public static UiObject getUIViewLocator(String key) {
         Context context = AutomationCore.getInstance().getInstrumentation().getContext();
         Resources resources = context.getResources();
-        int id = resources.getIdentifier(key,"string",context.getPackageName());
+        int id = resources.getIdentifier(key, "string", context.getPackageName());
         String value = resources.getString(id);
         String[] arrOfValue = value.split("=", 2);
         String prefix = arrOfValue[0];
         String suffix = arrOfValue[1];
-        Log.d("suffix",suffix);
-        Log.d("prefix",prefix);
+        Log.d("suffix", suffix);
+        Log.d("prefix", prefix);
         return getUIViewInteraction(prefix, suffix);
+    }
+    public static List<UiObject2> getUIViewsLocator(String key) {
+        Context context = AutomationCore.getInstance().getInstrumentation().getContext();
+        Resources resources = context.getResources();
+        int id = resources.getIdentifier(key, "string", context.getPackageName());
+        String value = resources.getString(id);
+        String[] arrOfValue = value.split("=", 2);
+        String prefix = arrOfValue[0];
+        String suffix = arrOfValue[1];
+        Log.d("suffix", suffix);
+        Log.d("prefix", prefix);
+        return getUIViewsInteraction(prefix, suffix);
     }
 
     public static UiObject getUIViewInteraction(String strategy, String selector) {
@@ -79,9 +93,8 @@ public class LocatorUtils {
         UiSelector uiSelector = new UiSelector();
         switch (s) {
             case "ID":
-                if(!selector.contains(":id/"))
-                    selector = AutomationCore.getInstance().getUiDevice().getCurrentPackageName()+":id/"+selector;
-                return AutomationCore.getInstance().getUiDevice().findObject(uiSelector.resourceId(selector));
+                if (!selector.contains(":id/"))
+                    selector = AutomationCore.getInstance().getUiDevice().getCurrentPackageName() + ":id/" + selector;
             case "TEXT":
                 // containsText matches is case insensitive
                 // text is case sensitive....
@@ -94,4 +107,23 @@ public class LocatorUtils {
         return null;
     }
 
+    public static List<UiObject2> getUIViewsInteraction(String strategy, String selector) {
+        String s = strategy.toUpperCase();
+        UiSelector uiSelector = new UiSelector();
+        switch (s) {
+            case "ID":
+                if (!selector.contains(":id/"))
+                    selector = AutomationCore.getInstance().getUiDevice().getCurrentPackageName() + ":id/" + selector;
+                return AutomationCore.getInstance().getUiDevice().findObjects(By.res(selector));
+            case "TEXT":
+                // containsText matches is case insensitive
+                // text is case sensitive....
+                return AutomationCore.getInstance().getUiDevice().findObjects(By.text(selector));
+            case "ACCESSIBILITY_ID":
+
+            case "CONTDESC":
+                return AutomationCore.getInstance().getUiDevice().findObjects(By.descContains(selector));
+        }
+        return null;
+    }
 }

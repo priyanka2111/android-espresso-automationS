@@ -55,4 +55,8 @@
         <string name="profile.ui.fullname.text.loc">id=fullname</string>
         <string name="profile.ui.horiscrollbar.text.loc">text=GISTS</string>
     <!---->
+
+    <!--Gists Page UiAutomator-->
+        <string name="gists.ui.title.text.loc">id=title</string>
+    <!---->
 </resources>

@@ -20,7 +20,10 @@ import com.infostretch.android.utils.LocatorUtils;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
+import org.xml.sax.Locator;
 
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -466,7 +469,10 @@ public class UiAutomatorSteps {
         return null;
     }
     // code to get UiSelector ends here...
+
     public static UiObject getUIElement(String loc) {
         return LocatorUtils.getUIViewLocator(loc);
     }
+
+    public static List<UiObject2> getUIElements(String loc){return LocatorUtils.getUIViewsLocator(loc);}
 }
