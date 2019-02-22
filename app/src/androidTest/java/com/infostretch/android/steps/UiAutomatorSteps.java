@@ -9,6 +9,8 @@ import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiScrollable;
+import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.widget.Toast;
 
@@ -352,6 +354,39 @@ public class UiAutomatorSteps {
         }
     }
 
+    /**
+     * Scroll Horizontally Until View Found
+     */
+    public static void scrollHorizontal(String loc){
+        UiScrollable appViews = new UiScrollable(new UiSelector().scrollable(true));
+        appViews.setAsHorizontalList();
+        try {
+            appViews.scrollIntoView(getUiSelector(loc));
+//            AutomationCore.getInstance().getUiDevice().findObject(new UiSelector().text("GISTS")).click();
+
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void scrollVertical(String loc){
+        UiScrollable appViews = new UiScrollable(new UiSelector().scrollable(true));
+        appViews.setAsHorizontalList();
+        try {
+            appViews.scrollIntoView(getUiSelector(loc));
+//            AutomationCore.getInstance().getUiDevice().findObject(new UiSelector().text("GISTS")).click();
+
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void verifyIsFocusable(String loc, String message) {
         try {
             uiObject2 = AutomationCore.getInstance().getUiDevice().findObject(getBySelector(loc));
@@ -361,7 +396,7 @@ public class UiAutomatorSteps {
             Toast.makeText(AutomationCore.getInstance().getTargetContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
+    //-->code to get byselector
     private static BySelector getBySelector(String loc) throws Exception {
         Context context = AutomationCore.getInstance().getInstrumentation().getContext();
         Resources resources = context.getResources();
@@ -395,8 +430,42 @@ public class UiAutomatorSteps {
         }
         return selector;
     }
+    // Code to Byselector ends here
 
 
+    //--> Code to get UiSelector
+    public static UiSelector getUiSelector(String loc) throws Exception {
+        Context context = AutomationCore.getInstance().getInstrumentation().getContext();
+        Resources resources = context.getResources();
+        int id = resources.getIdentifier(loc, "string", context.getPackageName());
+        String value = resources.getString(id);
+        String[] arrOfValue = value.split("=", 2);
+        String prefix = arrOfValue[0];
+        String suffix = arrOfValue[1];
+        return getUiSelector(prefix, suffix);
+    }
+
+    private static UiSelector getUiSelector(String strategy, String text) throws Exception {
+
+        String s = strategy.toUpperCase();
+        ;
+        switch (s) {
+            case "CLASSNAME":
+                return new UiSelector().className(text);
+
+            case "TEXT":
+                return new UiSelector().text(text);
+
+            case "ID":
+                return new UiSelector().resourceId(text);
+
+            case "ACCESSIBILITY_ID":
+                return new UiSelector().descriptionMatches(text);
+
+        }
+        return null;
+    }
+    // code to get UiSelector ends here...
     public static UiObject getUIElement(String loc) {
         return LocatorUtils.getUIViewLocator(loc);
     }

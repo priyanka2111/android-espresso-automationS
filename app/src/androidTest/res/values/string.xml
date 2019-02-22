@@ -46,7 +46,13 @@
     <!---->
 
 
-    <!--Profile Page Espresss-->
+    <!--Profile Page UiAUtomator-->
         <string name="profile.ui.following.btn.loc">id=following</string>
+        <string name="profile.ui.followers.btn.loc">id=followers</string>
+        <string name="profile.ui.organization.text.loc">id=organization</string>
+        <string nmae="profile.ui.location.text.loc">id=location</string>
+        <string name="profile.ui.blog.text.loc">id=link</string>
+        <string name="profile.ui.fullname.text.loc">id=fullname</string>
+        <string name="profile.ui.horiscrollbar.text.loc">text=GISTS</string>
     <!---->
 </resources>
