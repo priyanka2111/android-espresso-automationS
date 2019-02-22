@@ -374,7 +374,7 @@ public class UiAutomatorSteps {
 
     public static void scrollVertical(String loc){
         UiScrollable appViews = new UiScrollable(new UiSelector().scrollable(true));
-        appViews.setAsHorizontalList();
+        appViews.setAsVerticalList();
         try {
             appViews.scrollIntoView(getUiSelector(loc));
 //            AutomationCore.getInstance().getUiDevice().findObject(new UiSelector().text("GISTS")).click();
