@@ -194,6 +194,9 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espresseVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresseVersion}"
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
+    // https://mvnrepository.com/artifact/org.kohsuke/github-api
+    compile group: 'org.kohsuke', name: 'github-api', version: '1.95'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

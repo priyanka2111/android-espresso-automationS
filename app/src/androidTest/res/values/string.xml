@@ -16,7 +16,47 @@
     <string name="login.ui.basic.auth.txt.btn.loc">text="Basic Authentication"</string>
 
 
-    <string name="home.ui.menu.drawer.loc">contdesc="Navigate up"</string>
-    <!--string name="login.menu.btn.loc">contdesc=‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‎‏‏‎‎‎‎‏‏‏‏‏‏‏‎‏‏‏‏‏‎‏‎‎‏‏‎‏‎‎‎‎‎‏‏‏‎‏‎‎‎‎‎‏‏‎‏‏‎‎‏‎‏‎‏‏‏‏‏‎‎Navigate up‎‏‎‎‏‎</string-->
 
+    <string name="home.ui.menu.drawer.loc">contdesc="Navigate up"</string>
+    <string name="just.test">xpath=//com.fastaccess.ui.widgets.FontTextView[@resource-id=\'app:id/basicAuth\']</string>
+
+    <!--Home Page Bottom Navigation - Espresso -->
+    <string name="home.ui.bottom.navigation.pinned.loc">id=pinned</string>
+    <string name="home.ui.bottom.navigation.feeds.loc">id=feeds</string>
+    <string name="home.ui.bottom.navigation.pullRequests.loc">id=pullRequests</string>
+    <!---->
+
+    <!--Home Page Left Navigation - UiAutomator-->
+    <string name="home.ui.drawer.profile.loc">text=Profile</string>
+    <string name="home.ui.drawer.home.loc">text=Home</string>
+    <string name="home.ui.drawer.organizations.loc">text=Organizations</string>
+    <string name="home.ui.drawer.pinned.loc">text=Pinned</string>
+    <string name="home.ui.drawer.trending.loc">text=Trending</string>
+    <string name="home.ui.drawer.gists.loc">text=Gists</string>
+    <string name="home.ui.drawer.sendfeedback.loc">text=Send feedback</string>
+    <string name="home.ui.drawer.logout.loc">text=Logout</string>
+    <string name="home.ui.drawer.addaccount.loc">text=Add Account</string>
+    <string name="home.ui.drawer.repo.loc">text=Repositories</string>
+    <string name="home.ui.drawer.starred.loc">text=Starred</string>
+    <!---->
+
+    <!--Home Page Left Top Navigation - UiAutomator-->
+    <string name="home.ui.drawer.top.menu.loc">text=MENU</string>
+    <string name="home.ui.drawer.top.profile.loc">text=PROFILE</string>
+    <!---->
+
+
+    <!--Profile Page UiAUtomator-->
+        <string name="profile.ui.following.btn.loc">id=following</string>
+        <string name="profile.ui.followers.btn.loc">id=followers</string>
+        <string name="profile.ui.organization.text.loc">id=organization</string>
+        <string nmae="profile.ui.location.text.loc">id=location</string>
+        <string name="profile.ui.blog.text.loc">id=link</string>
+        <string name="profile.ui.fullname.text.loc">id=fullname</string>
+        <string name="profile.ui.horiscrollbar.text.loc">text=GISTS</string>
+    <!---->
+
+    <!--Gists Page UiAutomator-->
+        <string name="gists.ui.title.text.loc">id=title</string>
+    <!---->
 </resources>

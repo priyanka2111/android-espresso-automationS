@@ -122,7 +122,6 @@ public class EspressoSteps {
         getElement(loc).check(matches(ViewMatchers.withTagValue(objectMatcher)));
     }
 
-
     public static ViewInteraction getElement(String loc){
         return LocatorUtils.getViewLocator(loc);
     }
