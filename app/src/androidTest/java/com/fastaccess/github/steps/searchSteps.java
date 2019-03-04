@@ -1,25 +1,20 @@
 package com.fastaccess.github.steps;
 
-import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.ViewInteraction;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.view.View;
-
 import com.fastaccess.R;
 import com.infostretch.android.steps.EspressoSteps;
-import com.infostretch.android.steps.UiAutomatorSteps;
 import com.infostretch.android.utils.GetChildViewMatcher;
-
 import org.hamcrest.Matcher;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
-import static com.infostretch.android.steps.EspressoSteps.TypeText;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.infostretch.android.steps.EspressoSteps.getElement;
 import static com.infostretch.android.steps.EspressoSteps.sendKeys;
+import static com.infostretch.android.steps.EspressoSteps.typeText;
 
 public class searchSteps {
         public static void clickOnSearch() {
@@ -28,12 +23,13 @@ public class searchSteps {
 
 
         public static void verifySearchEditText() {
-            EspressoSteps.IsDisplayed("search.text.loc");
+            EspressoSteps.isDisplayed("search.text.loc");
         }
 
         public static void verifyEditTextError() {
+
             ViewInteraction editText = getElement("search.text.loc");
-            TypeText("search.text.loc", "");
+            typeText("search.text.loc", "");
             clickOnSearch();
             editText.check(matches(hasErrorText("Minimum characters (2)")));
 
@@ -57,14 +53,14 @@ public class searchSteps {
         }
 
         public static void selectTab(int pos){
-            Matcher<View> linearlayoutmatcher = GetChildViewMatcher.nthChildOf(ViewMatchers.withId(R.id.tabs), 0);
+            Matcher<View> linearlayoutmatcher = GetChildViewMatcher.nthChildOf(withId(R.id.tabs), 0);
             Matcher<View> tabmatcher = GetChildViewMatcher.nthChildOf(linearlayoutmatcher,pos);
             ViewInteraction created = onView(tabmatcher);
             created.perform(click());
         }
 
-        public static void searchText() {
-            sendKeys("search.text.loc", "priyanka");
+        public static void searchTypeText(String text) {
+            sendKeys("search.text.loc",text);
             clickOnSearch();
         }
 
@@ -75,7 +71,18 @@ public class searchSteps {
                 e.printStackTrace();
             }
           //  UiAutomatorSteps.scrollVertical("search.recyclerview.scrollview.loc");
-            EspressoSteps.ClickOnRecyclerViewChild("recycler",pos);
+            EspressoSteps.clickOnRecyclerViewChild("recycler",pos);
+
+        }
+
+        public static void searchFile(){
+            selectTab(1);
+            EspressoSteps.click("search.repoFile.loc");
+            searchTypeText("code");
+            EspressoSteps.click("search.repoFile.searchOption.loc");
+            EspressoSteps.click("search.repofile.searchInPath.loc");
+//            EspressoSteps.click("search.repoFile.searchInFile.loc");
+//            EspressoSteps.click("search.repoFile.searchInAll");
         }
 
     }

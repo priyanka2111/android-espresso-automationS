@@ -48,7 +48,13 @@
     <!-- Search locators-->
     <string name="search.ui.btn.loc">id=search</string>
     <string name="search.text.loc">id=searchEditText</string>
-
+    <string name="search.repo.headertitle.loc">id=headerTitle</string>
+    <string name="search.repo.title">id=title</string>
+    <string name="search.repoFile.loc">id=searchRepoFiles</string>
+    <string name="search.repoFile.searchOption.loc">id=searchOptions</string>
+    <string name="search.repofile.searchInPath.loc">text=In Paths</string>
+    <string name="search.repoFile.searchInFile.loc">text=In Files</string>
+    <string name="search.repoFile.searchInAll">text=All</string>
     <!---->
 
 

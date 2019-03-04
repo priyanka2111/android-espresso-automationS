@@ -11,10 +11,12 @@ import static com.fastaccess.github.steps.searchSteps.clickOnIssues;
 import static com.fastaccess.github.steps.searchSteps.clickOnRepo;
 import static com.fastaccess.github.steps.searchSteps.clickOnSearch;
 import static com.fastaccess.github.steps.searchSteps.clickOnUsers;
-import static com.fastaccess.github.steps.searchSteps.searchText;
+import static com.fastaccess.github.steps.searchSteps.searchFile;
+import static com.fastaccess.github.steps.searchSteps.searchTypeText;
 import static com.fastaccess.github.steps.searchSteps.selectRecyclerViewListItem;
 import static com.fastaccess.github.steps.searchSteps.verifyEditTextError;
 import static com.fastaccess.github.steps.searchSteps.verifySearchEditText;
+
 
 
 public class SearchTestCases extends BaseTestCase {
@@ -38,7 +40,7 @@ public class SearchTestCases extends BaseTestCase {
     @Test
     public void searchUser()  {
         clickOnSearch();
-        searchText();
+        searchTypeText("priyanka");
         clickOnUsers();
         selectRecyclerViewListItem(12);
     }
@@ -46,24 +48,36 @@ public class SearchTestCases extends BaseTestCase {
     @Test
     public void searchRepositary(){
         clickOnSearch();
-        searchText();
-        clickOnRepo();
-        selectRecyclerViewListItem(3);
+        searchTypeText("priyanka");
+        selectRecyclerViewListItem(7);
+
+
     }
 
     @Test
     public void searchIssues(){
         clickOnSearch();
-        searchText();
+        searchTypeText("priyanka");
         clickOnIssues();
         selectRecyclerViewListItem(1);
     }
     @Test
     public void searchCode(){
         clickOnSearch();
-        searchText();
+        searchTypeText("priyanka");
         clickOnCode();
         selectRecyclerViewListItem(6);
+    }
+
+    @Test
+    public void searchRepoFiles(){
+        clickOnSearch();
+        searchTypeText("priyanka");
+        clickOnRepo();
+        selectRecyclerViewListItem(5);
+        searchFile();
+     //   selectRecyclerViewListItem(0);
+
     }
 
 }
