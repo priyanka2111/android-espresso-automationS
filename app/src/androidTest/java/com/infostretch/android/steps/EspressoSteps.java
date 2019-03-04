@@ -2,9 +2,11 @@ package com.infostretch.android.steps;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.BySelector;
@@ -17,9 +19,16 @@ import com.infostretch.android.utils.LocatorUtils;
 
 import org.hamcrest.Matcher;
 
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.PreferenceMatchers.isEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withChild;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.endsWith;
 
 public class EspressoSteps {
 
@@ -76,7 +85,7 @@ public class EspressoSteps {
     }
 
     public static void IsDisplayed(String loc){
-        getElement(loc).check(matches(ViewMatchers.isDisplayed()));
+        getElement(loc).check(matches(isDisplayed()));
     }
 
     public static void IsChecked(String loc){
@@ -108,12 +117,17 @@ public class EspressoSteps {
     }
 
     public static void WithID(String loc ,int id){
-        getElement(loc).check(matches(ViewMatchers.withId(id)));
+        getElement(loc).check(matches(withId(id)));
     }
 
     public static void WithClassName(String loc ,Matcher<String> stringMatcher){
         getElement(loc).check(matches(ViewMatchers.withClassName(stringMatcher)));
     }
+    public static void ClickOnRecyclerViewChild(String recycleIdName ,int pos){
+
+        onView(allOf(withId(getResourceId(recycleIdName)),isDisplayed(),withChild(withClassName(endsWith("RelativeLayout"))))).perform(RecyclerViewActions.actionOnItemAtPosition(pos,ViewActions.click()));
+    }
+
 
     public static void WithTagKey(String loc ,int id){
         getElement(loc).check(matches(ViewMatchers.withTagKey(id)));
@@ -121,7 +135,11 @@ public class EspressoSteps {
     public static void WithTagValue(String loc , Matcher<Object> objectMatcher ){
         getElement(loc).check(matches(ViewMatchers.withTagValue(objectMatcher)));
     }
-
+    public static int getResourceId(String s) {
+        Context targetContext = InstrumentationRegistry.getTargetContext();
+        String packageName = targetContext.getPackageName();
+        return targetContext.getResources().getIdentifier(s, "id", packageName);
+    }
     public static ViewInteraction getElement(String loc){
         return LocatorUtils.getViewLocator(loc);
     }

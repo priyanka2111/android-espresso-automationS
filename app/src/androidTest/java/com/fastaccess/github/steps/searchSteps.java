@@ -23,7 +23,7 @@ import static com.infostretch.android.steps.EspressoSteps.sendKeys;
 
 public class searchSteps {
         public static void clickOnSearch() {
-            EspressoSteps.click("home.search.btn.loc");
+            EspressoSteps.click("search.ui.btn.loc");
         }
 
 
@@ -74,8 +74,8 @@ public class searchSteps {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            UiAutomatorSteps.scrollVertical("search.recyclerview.scrollview.loc");
-            EspressoSteps.clickOnRecyclerViewWithChild("recycler",pos);
+          //  UiAutomatorSteps.scrollVertical("search.recyclerview.scrollview.loc");
+            EspressoSteps.ClickOnRecyclerViewChild("recycler",pos);
         }
 
     }

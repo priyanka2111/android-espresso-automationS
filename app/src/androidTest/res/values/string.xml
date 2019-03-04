@@ -45,6 +45,12 @@
     <string name="home.ui.drawer.top.profile.loc">text=PROFILE</string>
     <!---->
 
+    <!-- Search locators-->
+    <string name="search.ui.btn.loc">id=search</string>
+    <string name="search.text.loc">id=searchEditText</string>
+
+    <!---->
+
 
     <!--Profile Page UiAUtomator-->
         <string name="profile.ui.following.btn.loc">id=following</string>
