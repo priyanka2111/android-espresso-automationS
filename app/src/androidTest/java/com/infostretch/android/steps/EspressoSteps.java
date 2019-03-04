@@ -51,88 +51,88 @@ public class EspressoSteps {
         getElement(loc).perform(ViewActions.clearText());
     }
 
-    public static void TypeText(String loc ,String text){
+    public static void typeText(String loc ,String text){
         getElement(loc).perform(ViewActions.typeText(text));
     }
 
-    public static void DoubleClick(String loc){
+    public static void doubleClick(String loc){
         getElement(loc).perform(ViewActions.doubleClick());
     }
 
-    public static void LongClick(String loc){
+    public static void longClick(String loc){
         getElement(loc).perform(ViewActions.longClick());
     }
 
 
-    public static void ScrollTo(String loc){
+    public static void scrollTo(String loc){
         getElement(loc).perform(ViewActions.scrollTo());
     }
 
-    public static void OpenLinkWithText(String loc ,String linkText){
+    public static void openLinkWithText(String loc ,String linkText){
         getElement(loc).perform(ViewActions.openLinkWithText(linkText));
     }
 
-    public static void OpenLinkWithURI(String loc,String uri){
+    public static void openLinkWithURI(String loc,String uri){
         getElement(loc).perform(ViewActions.openLinkWithUri(uri));
     }
 
-    public static void ReplaceText(String loc,String text){
+    public static void replaceText(String loc,String text){
         getElement(loc).perform(ViewActions.replaceText(text));
     }
 
-    public static void IsEnabled(String loc){
+    public static void isEnabled(String loc){
         getElement(loc).check(matches(ViewMatchers.isEnabled()));
     }
 
-    public static void IsDisplayed(String loc){
-        getElement(loc).check(matches(isDisplayed()));
+    public static void isDisplayed(String loc){
+        getElement(loc).check(matches(ViewMatchers.isDisplayed()));
     }
 
-    public static void IsChecked(String loc){
+    public static void isChecked(String loc){
         getElement(loc).check(matches(ViewMatchers.isChecked()));
     }
 
-    public static void IsNotChecked(String loc){
+    public static void isNotChecked(String loc){
         getElement(loc).check(matches(ViewMatchers.isNotChecked()));
     }
 
-    public static void IsSelected(String loc){
+    public static void isSelected(String loc){
         getElement(loc).check(matches(ViewMatchers.isSelected()));
     }
 
-    public static void HasContentDescription(String loc){
+    public static void hasContentDescription(String loc){
         getElement(loc).check(matches(ViewMatchers.hasContentDescription()));
     }
 
-    public static void WithContentDescription(String loc,String text){
+    public static void withContentDescription(String loc,String text){
         getElement(loc).check(matches(ViewMatchers.withContentDescription(text)));
     }
 
-    public static void WithHint(String loc,String hintText){
+    public static void withHint(String loc,String hintText){
         getElement(loc).check(matches(ViewMatchers.withHint(hintText)));
     }
 
-    public static void WithText(String loc, String text){
+    public static void withText(String loc, String text){
         getElement(loc).check(matches(ViewMatchers.withText(text)));
     }
 
-    public static void WithID(String loc ,int id){
+    public static void withID(String loc ,int id){
         getElement(loc).check(matches(withId(id)));
     }
 
-    public static void WithClassName(String loc ,Matcher<String> stringMatcher){
+    public static void withClassName(String loc ,Matcher<String> stringMatcher){
         getElement(loc).check(matches(ViewMatchers.withClassName(stringMatcher)));
     }
-    public static void ClickOnRecyclerViewChild(String recycleIdName ,int pos){
+    public static void clickOnRecyclerViewChild(String recycleIdName ,int pos){
 
-        onView(allOf(withId(getResourceId(recycleIdName)),isDisplayed(),withChild(withClassName(endsWith("RelativeLayout"))))).perform(RecyclerViewActions.actionOnItemAtPosition(pos,ViewActions.click()));
+        onView(allOf(withId(getResourceId(recycleIdName)),ViewMatchers.isDisplayed(),withChild(ViewMatchers.withClassName(endsWith("RelativeLayout"))))).perform(RecyclerViewActions.actionOnItemAtPosition(pos,ViewActions.click()));
     }
 
 
-    public static void WithTagKey(String loc ,int id){
+    public static void withTagKey(String loc ,int id){
         getElement(loc).check(matches(ViewMatchers.withTagKey(id)));
     }
-    public static void WithTagValue(String loc , Matcher<Object> objectMatcher ){
+    public static void withTagValue(String loc , Matcher<Object> objectMatcher ){
         getElement(loc).check(matches(ViewMatchers.withTagValue(objectMatcher)));
     }
     public static int getResourceId(String s) {
